@@ -28,7 +28,7 @@ angular.module('ui.bootstrap.datetimepicker', [])
       this.dateValue = new Date().getTime();
       this.selectable = true;
 
-      var validProperties = ['dateValue', 'display', 'active', 'selectable', 'past', 'future'];
+      var validProperties = ['dateValue', 'display', 'active', 'selectable', 'past', 'future', 'today'];
 
       for (var prop in arguments[0]) {
         //noinspection JSUnfilteredForInLoop
@@ -103,7 +103,7 @@ angular.module('ui.bootstrap.datetimepicker', [])
         "           <td data-ng-repeat='dateObject in week.dates' " +
         "               data-ng-click='changeView(data.nextView, dateObject, $event)'" +
         "               class='day' " +
-        "               data-ng-class='{active: dateObject.active, past: dateObject.past, future: dateObject.future, disabled: !dateObject.selectable}' >{{ dateObject.display }}</td>" +
+        "               data-ng-class='{active: dateObject.active, past: dateObject.past, today: dateObject.today, future: dateObject.future, disabled:                !dateObject.selectable}' >{{ dateObject.display }}</td>" +
         "       </tr>" +
         "   </tbody>" +
         "</table></div>",
@@ -225,6 +225,7 @@ angular.module('ui.bootstrap.datetimepicker', [])
                 var dateValue = {
                   'dateValue': monthMoment.valueOf(),
                   'display': monthMoment.format('D'),
+                  'today' : monthMoment.isSame(new Date(), "day"),
                   'active': monthMoment.format('YYYY-MMM-DD') === activeDate,
                   'past': monthMoment.isBefore(startOfMonth),
                   'future': monthMoment.isAfter(endOfMonth)
