@@ -94,7 +94,7 @@ angular.module('ui.bootstrap.datetimepicker', [])
         "           <td data-ng-repeat='dateValue in week.dates' " +
         "               data-ng-click='changeView(data.nextView, dateValue.date, $event)'" +
         "               class='day' " +
-        "               data-ng-class='{active: dateValue.active, past: dateValue.past, future: dateValue.future}' >{{ dateValue.display }}</td>" +
+        "               data-ng-class='{active: dateValue.active, past: dateValue.past, future: dateValue.future, today: dateValue.today}' >{{ dateValue.display }}</td>" +
         "       </tr>" +
         "   </tbody>" +
         "</table></div>",
@@ -218,6 +218,7 @@ angular.module('ui.bootstrap.datetimepicker', [])
                   'date': monthMoment.valueOf(),
                   'display': monthMoment.format('D'),
                   'active': monthMoment.format('YYYY-MMM-DD') === activeDate,
+                  'today' : monthMoment.isSame(new Date(), "day"),
                   'past': monthMoment.isBefore(startOfMonth),
                   'future': monthMoment.isAfter(endOfMonth)
                 };
